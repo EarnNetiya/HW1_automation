@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./asset/styles/route.css">
+    <script src="https://kit.fontawesome.com/317e5df4ed.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Side Navbar tag -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="./asset/img/Logo-C.jpg" alt="">
+                    <span class="nav-item"></span>
+                </a>
+            </li>
+
+            <li><a href="#">
+                <i class="fas fa-home"></i>
+                <span class="nav-item">Home</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-file-arrow-up"></i>
+                <span class="nav-item">Run Config</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-arrow-up-9-1"></i>
+                <span class="nav-item">Ip Interface</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-regular fa-file-lines"></i>
+                <span class="nav-item">Show Vlan</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-gears"></i>
+                <span class="nav-item">Config Vlan</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-screwdriver-wrench"></i>
+                <span class="nav-item">Config Interface</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-keyboard"></i>
+                <span class="nav-item">Config Routing</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-gear"></i>
+                <span class="nav-item">Config Switch Port</span>
+            </a></li>
+
+            <!-- Logout Function -->
+
+            <div class="logout">
+                <li><a href="#">
+                    <i class="fas fa-solid fa-right-from-bracket"></i>
+                    <span class="nav-item">logout</span>
+                </a></li>
+            </div>
+        </ul>
+    </nav>
+    <div class="container">
+
+        
+        <div class="wrapper">
+            <h1>SHOW INTERFACE</h1>
+            <pre>{{ output }}</pre>
+        </div>
+
+        <div class="input_infor">
+
+
+
+            <div class="wrapper1">
+                <h3>Config Ip route</h3>
+
+                <form method="POST" action="/ip_route">
+                    <label for="ip_network">Config ip Routing : </label>
+                    <input type="text" name="ip_network" id="ip_network">
+                    <input type="text" name="subnetmask" id="subnetmask">
+                    <input type="text" name="next_hop" id="next_hop">
+
+                    <label for="add_routing">Add IP Routing : </label>
+                    <input type="checkbox" name="add_routing" id="add_routing" value="yes">
+
+                    <input type="submit" value="Edit IP"  class="button_mg">
+                </form>
+            </div>
+
+
+
+            <div class="wrapper2">
+                <h3>Remove Ip route</h3>
+
+                <form method="POST" action="/removeiproute">
+                    <label for="ip_network">Remove ip route : </label>
+                    <input type="text" name="ip_network" id="ip_network">
+                    <input type="text" name="subnetmask" id="subnetmask">
+                    <input type="text" name="next_hop" id="next_hop">
+            
+                    <label for="add_routing">Remove IP Routing : </label>
+                    <input type="checkbox" name="add_routing" id="add_routing" value="yes">
+                    <input type="submit" value="Edit IP" class="button_mg">
+                </form>
+                
+            </div>
+        </div>
+
+    </div>
+   
+</body>
+</html>

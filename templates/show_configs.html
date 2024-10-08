@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Configurations</title>
+</head>
+<body>
+    <h2>Show Configurations</h2>
+    <form action="/show_configs" method="POST">
+        <input type="checkbox" name="show_run" value="show_run"> Show Running-config<br>
+        <input type="checkbox" name="show_interface" value="show_interface"> Show Interfaces<br>
+        <input type="checkbox" name="show_iproute" value="show_iproute"> Show IP Route<br>
+        <input type="checkbox" name="show_ipintbrief" value="show_ipintbrief"> Show IP Interface Brief<br>
+        <input type="checkbox" name="show_vlan" value="show_vlan"> Show VLAN<br>
+        <input type="checkbox" name="show_inttrunk" value="show_inttrunk"> Show Interface Trunk<br>
+        <input type="submit" value="Show Configurations">
+    </form>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./asset/styles/config_swport.css">
+    <script src="https://kit.fontawesome.com/317e5df4ed.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Side Navbar tag -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="./asset/img/Logo-C.jpg" alt="">
+                    <span class="nav-item"></span>
+                </a>
+            </li>
+
+            <li><a href="#">
+                <i class="fas fa-home"></i>
+                <span class="nav-item">Home</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-file-arrow-up"></i>
+                <span class="nav-item">Run Config</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-arrow-up-9-1"></i>
+                <span class="nav-item">Ip Interface</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-regular fa-file-lines"></i>
+                <span class="nav-item">Show Vlan</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-gears"></i>
+                <span class="nav-item">Config Vlan</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-screwdriver-wrench"></i>
+                <span class="nav-item">Config Interface</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-keyboard"></i>
+                <span class="nav-item">Config Routing</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-gear"></i>
+                <span class="nav-item">Config Switch Port</span>
+            </a></li>
+
+            <!-- Logout Function -->
+
+            <div class="logout">
+                <li><a href="#">
+                    <i class="fas fa-solid fa-right-from-bracket"></i>
+                    <span class="nav-item">logout</span>
+                </a></li>
+            </div>
+        </ul>
+    </nav>
+    <div class="container">
+
+        <!-- Function of Swport Configuration -->
+        <div class="wrapper">
+            <h1>SHOW INTERFACE</h1>
+            <pre>{{ output }}</pre>
+        </div>
+        
+        
+
+        <div class="wrapper1">
+            <h3>Insert ip address</h3>
+            <ul>
+                {% for interface in interface_list %}
+                <li>
+                    {{ interface }}
+                    <form method="POST" action="/interface_port">
+        
+                        <input type="hidden" name="interface" value="{{ interface }}">
+                        <label for="new_ip">IP Address :</label>
+                        <input type="text" name="new_ip" id="new_ip">
+                        Subnet mask : <input type="text" name="new_subnetmask" id="new_subnetmask">
+        
+                        <label for="noswitchport">Add No Switchport : </label>
+                        <input type="checkbox" name="noswitchport" id="noswitchport" value="yes">
+        
+                        <input type="submit" value="SUBMIT" class="button_mg">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+
+        <div class="wrapper2">
+            <h3>Remove ip address</h3>
+            <ul>
+                {% for interface in interface_list %}
+                <li>
+                    {{ interface }}
+                    <form method="POST" action="/remove_port">
+                        <input type="hidden" name="interface" value="{{ interface }}">
+                        <label for="remove_ip">IP Address :</label>
+                        <input type="text" name="remove_ip" id="remove_ip">
+                        Subnet mask : <input type="text" name="remove_subnetmask" id="remove_subnetmask">
+
+                        <label for="switchport">Add Switchport : </label>
+                        <input type="checkbox" name="switchport" id="switchport" value="yes">
+
+                        <input type="submit" value="SUBMIT" class="button_mg">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+       
+    </div>
+</body>
+</html>

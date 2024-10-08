@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+/* ส่วนของNavbar*/
+nav img{
+    display: flex;
+    height: 80px;
+    height: 80px;
+    margin-left: 1%;
+}
+body {
+    background: #dfe9f5;
+}
+nav{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    background: #04364A;
+    width: 90px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    position: fixed;
+}
+.logo{
+    text-align: center;
+    display: flex;
+    transition: all 0.5s ease;
+    margin: 10px 0 0 10px;
+}
+.logo img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.logo span{
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: white;
+}
+a{
+    position: relative;
+    color: white;
+    font-size: 18px;
+    display: table;
+    width: 300px;
+    padding: 10px;
+}
+.fas{
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+}
+.nav-item{
+    position: relative;
+    top: 12px;
+    margin: 10px;
+}
+a.hover{
+    background: white;
+}
+a:hover .fas{
+    color: #8EACCD;
+}
+a:hover .nav-item{
+    color: #8EACCD;
+}
+nav:hover{
+    width: 280px;
+    transition: all 0.5s ease;
+}
+/* ส่วนของNavbar*/
+/* ส่วนของLogin*/
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.wrapper1{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: #eee;
+    margin-bottom: 1vh;
+}
+.fram-showinterface{
+    color: black;
+    width: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #8EACCD;
+    border-radius: 10px;
+    
+}
+.fram-showinterface h1{
+    display: flex;
+    justify-content: center;
+}
+.fram-showinterface pre{
+    display: flex;
+    justify-content: center;
+}
+.fram-configinterface{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 2vh;
+    width: 80vh;
+    height: 230px;
+    background-color: #04364A;
+    border-radius: 10px;
+}
+.fram-configinterface h1{
+    margin-left: -20px;
+}
+.fram_removeSW h1{
+    margin-left: -70px;
+}
+.fram_removeSW{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5px;  
+    margin-left: 2vh;
+    width: 80vh;  
+    background-color: #04364A; 
+    height: 230px;
+    border-radius: 10px;
+    
+}
+.fram_removeSW div{
+    margin-left: 2vh;
+}
+.fram-configinterface select{
+    border-radius: 5px;
+}
+.fram_removeSW select{
+    border-radius: 5px;
+}
+.button1{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 70px;
+    margin-left: 180px;
+}
+.button1 input{
+    background-color: #64CCC5;
+    border-radius: 5px;
+    padding: 5px;
+}
+.button3{
+    margin-top: 10px;
+}
+.button3 input{
+    margin-left: 19.3vh;
+    padding: 5px;
+    border-radius: 5px;
+    height: 40px;
+    width: 75px;
+    background-color: #64CCC5;
+}
+.button3 input:hover{
+    background-color: #6fa9e7;
+    cursor: pointer;
+}
+.button1 input:hover{
+    background-color: #6fa9e7;
+    cursor: pointer;
+}

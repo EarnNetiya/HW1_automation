@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSH-login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/login_MM.css">
+</head>
+<body>
+    <div class="box">
+        <form action="/login" method="POST" autocomplete="off" class="form">
+            <h2 class="page-header text-primary">Login</h2>
+
+            <div class="inputBox">
+                <input type="text" name="username" class="form-control" required>
+                <span>Username</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="password" name="password" id="password" class="form-control" required>
+                <a><img style="width: 25px;" src="static/img/hidden.png" onclick="pass()" class="pass-icon" id="pass-icon"></a>
+                <span>Password</span>
+                <i></i>
+            </div>
+            <div class="links">
+                <input type="submit" value="Login" class="btn btn-success btn-block">
+                <!-- <a href="{{ url_for('add_device') }}">Add Device Page</a> -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+/* ส่วนของNavbar*/
+nav img{
+    display: flex;
+    height: 80px;
+    height: 80px;
+    margin-left: 1%;
+}
+body {
+    background: #dfe9f5;
+}
+nav{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    background: #04364A;
+    width: 90px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    position: fixed;
+}
+.logo{
+    text-align: center;
+    display: flex;
+    transition: all 0.5s ease;
+    margin: 10px 0 0 10px;
+}
+.logo img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.logo span{
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: white;
+}
+a{
+    position: relative;
+    color: white;
+    font-size: 18px;
+    display: table;
+    width: 300px;
+    padding: 10px;
+}
+.fas{
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+}
+.nav-item{
+    position: relative;
+    top: 12px;
+    margin: 10px;
+}
+a.hover{
+    background: white;
+}
+a:hover .fas{
+    color: #8EACCD;
+}
+a:hover .nav-item{
+    color: #8EACCD;
+}
+nav:hover{
+    width: 280px;
+    transition: all 0.5s ease;
+}
+/* ส่วนของNavbar*/
+/* ส่วนของLogin*/
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin-top: 15px;
+}
+
+/* Config Vlan */
+.wrapper pre{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: 300;
+    
+}
+
+/* Wrapper1  Section */
+.wrapper1{
+    padding: 50px;
+    margin-top: 30px;
+    background-color: #04364A;
+    color: #dfe9f5;
+    padding: 5px;
+}
+.wrapper1 h3{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.wrapper1 .selection1{
+    margin-bottom: 10px;
+}
+
+.wrapper1 .trunk_selection{
+    margin-top: 10px;
+    margin-bottom: 2;
+}
+
+.wrapper1 .config_button{
+    margin-left: 10px;
+}
+
+
+
+.wrapper1 label{
+    margin-left: 10px;
+}
+.wrapper1 input{
+   margin-right: 20px;
+   padding: 5px;
+   text-align: center;
+   border-radius: 5px;
+   margin-bottom: 20px
+   
+}
+
+.wrapper2{
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #04364A;
+    color: #dfe9f5;
+    
+}
+.wrapper2 h3{
+    margin-bottom: 10px;
+}
+.wrapper2 .selection2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.wrapper2 input{
+   margin-right: 20px;
+   margin-left: 2px;
+   padding: 5px;
+   text-align: center;
+   border-radius: 5px;
+   margin-bottom: 20px
+   
+}
+.button_mg{
+    padding: 20px;
+    background-color: #64CCC5;
+    color: white;
+    transition: all 0.1s ease; 
+}
+.button_mg:hover{
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    opacity: 70%;
+    cursor: pointer;
+    
+}
