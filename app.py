@@ -7,14 +7,14 @@ app.secret_key = 'phatkawee'
 
 DEVICE_FILE = 'devices.json'
 
-#   load device from devices.JSON
+
 def load_devices():
     if not os.path.exists(DEVICE_FILE):
         return []  
     with open(DEVICE_FILE, 'r') as f:
         return json.load(f)
 
-#   save devices.JSON
+
 def save_devices(devices):
     with open(DEVICE_FILE, 'w') as f:
         json.dump(devices, f, indent=4)
@@ -48,14 +48,14 @@ def logout():
 
 @app.route('/add_device', methods=['GET', 'POST'])
 def add_device():
-    devices = load_devices()  # โหลดอุปกรณ์จากไฟล์ JSON
+    devices = load_devices() 
     
     if request.method == 'POST':
         if 'add' in request.form:
-            hostname = request.form.get('device_name')  # ชื่อโฮสต์
-            ip = request.form.get('ipaddress')  # IP address
-            username = request.form.get('username')  # ชื่อผู้ใช้
-            password = request.form.get('password')  # รหัสผ่าน
+            hostname = request.form.get('device_name') 
+            ip = request.form.get('ipaddress') 
+            username = request.form.get('username')  
+            password = request.form.get('password')  
             
             if not hostname or not ip or not username or not password:
                 flash('All fields are required.', 'error')
@@ -73,11 +73,10 @@ def add_device():
                     'password': password,
                 }
                 
-                # ตรวจสอบการเชื่อมต่อกับอุปกรณ์ก่อนที่จะบันทึก
                 try:
                     connection = ConnectHandler(**device)
                     connection.disconnect()
-                    # ถ้าการเชื่อมต่อสำเร็จให้บันทึกอุปกรณ์
+                   
                     devices.append({
                         'device_type': 'cisco_ios',
                         'hostname': hostname, 
@@ -85,20 +84,20 @@ def add_device():
                         'username': username,
                         'password': password,
                     })
-                    save_devices(devices)  # บันทึกอุปกรณ์ทั้งหมด
+                    save_devices(devices) 
                     flash(f'Device "{hostname}" with IP "{ip}" added successfully!', 'success')
                 except (NetMikoTimeoutException, NetMikoAuthenticationException) as e:
                     flash(f'Failed to connect to device with IP "{ip}": {str(e)}', 'error')
 
         elif 'delete' in request.form:
-            device_to_delete_ip = request.form.get('ipaddress', None)  # ใช้ IP address สำหรับการลบ
+            device_to_delete_ip = request.form.get('ipaddress', None)  
 
             if device_to_delete_ip:
                 original_length = len(devices)
                 devices = [d for d in devices if d.get('ip') != device_to_delete_ip]
 
                 if len(devices) < original_length:
-                    save_devices(devices)  # บันทึกหลังจากลบอุปกรณ์
+                    save_devices(devices) 
                     flash(f'Device with IP "{device_to_delete_ip}" deleted successfully!', 'success')
                 else:
                     flash(f'Device with IP "{device_to_delete_ip}" not found!', 'error')
@@ -111,7 +110,7 @@ def add_device():
 @app.route('/configurations', methods=["GET", "POST"])
 def configurations():
     devices = load_devices()  
-
+    
     if request.method == "POST":
         selected_device = request.form.get('selected_device')  
         device_info = next((d for d in devices if d.get('ip') == selected_device), None)
@@ -142,8 +141,7 @@ def configurations():
         network = request.form.get('network')
         wildcard_mask = request.form.get('wildcard_mask')
         version = request.form.get('version')
-        
-        
+
         
         try:
             connection_params = {
@@ -155,7 +153,6 @@ def configurations():
 
             net_connect = ConnectHandler(**connection_params)  
             net_connect.enable() 
-
 
             if action == 'vlan_config':
                 if vlan_id and request.form.get('vlan_name'):
@@ -182,27 +179,44 @@ def configurations():
                     
             elif action == 'interface_config':
                 if interface and ip_address and subnet_mask:
-                    config_commands = [
-                        f'interface {interface}',
+                    config_commands = [f'interface {interface}']
+
+                    # Check if the hostname exists in device_info and if it starts with 'R'
+                    hostname = device_info.get('hostname')  # Get the hostname from device_info
+                    if hostname:
+                        # If hostname does not start with 'R', add 'no switchport'
+                        if not hostname.startswith('R'):
+                            config_commands.append('no switchport')
+
+                    # Continue with the IP configuration commands
+                    config_commands.extend([
                         f'ip address {ip_address} {subnet_mask}',  
                         'no shutdown',
                         'exit',
                         'end',
                         'show ip interface brief'
-                    ]
-                    output = net_connect.send_config_set(config_commands)
+                    ])
+                    
+                    output = net_connect.send_config_set(config_commands, read_timeout=10)
 
+                    # Update the device IP in device_info and save the changes
+                    device_info['ip'] = ip_address  
+                    save_devices(devices)
+
+                    
             elif action == 'no_ipaddress':
                 if interface:
                     config_commands = [
                         f'interface {interface}',
-                        'no ip address',
-                        'exit',
+                        f'no {ip_address} {subnet_mask}',
+                        'exit'
                         'end',
                         'show ip interface brief'
                     ]
                     output = net_connect.send_config_set(config_commands)
-
+                    device_info['ip'] = ip_address  # Update the IP in device_info
+                    save_devices(devices)
+                    
             elif action == 'switchport_access_vlan':
                 if interface and vlan_id:
                     config_commands = [
@@ -246,7 +260,7 @@ def configurations():
                 if line_type in ['0 4', '5 15'] and transport_protocol in ['telnet', 'ssh']:
                     config_commands = [
                         f'line vty {line_type}',
-                        f'transport input {transport_protocol}',  # Select between Telnet and SSH
+                        f'transport input {transport_protocol}',  
                         'login local',
                         'exit',
                         'end',
@@ -313,7 +327,7 @@ def configurations():
                 if process_id and network and wildcard_mask:
                     config_commands = [
                         f'router ospf {process_id}',
-                        f'network {network} {wildcard_mask} area 0',  # Adjust area as needed
+                        f'network {network} {wildcard_mask} area 0', 
                         'exit',
                         'end',
                         'show ip ospf'
