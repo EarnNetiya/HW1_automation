@@ -5,30 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Device</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
 
-<!-- Side Navbar -->
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 20px 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .config-section {
+            margin-bottom: 40px;
+        }
+    </style>
+
 <nav>
     <ul>
         <li><a href="/add_device">
-            <i class="fas fa-home"></i>
-            <span class="nav-item">Add device</span>
+            <i class="fas fa-plus-circle"></i>
+            <span class="nav-item">Add Device</span>
         </a></li>
         <li><a href="/configurations">
-            <i class="fas fa-solid fa-arrow-up-9-1"></i>
+            <i class="fas fa-cog"></i>
             <span class="nav-item">Configurations</span>
         </a></li>
         <li><a href="/show_configs">
-            <i class="fas fa-regular fa-file-lines"></i>
-            <span class="nav-item">Show configurations</span>
+            <i class="fas fa-list"></i>
+            <span class="nav-item">Show Configurations</span>
         </a></li>
         <li><a href="/logout">
-            <i class="fas fa-list"></i>
+            <i class="fas fa-sign-out-alt"></i>
             <span class="nav-item">Logout</span>
         </a></li>
     </ul>
 </nav>
+
+</head>
+
+
+<body>
 
 <div class="container mt-5">
     <h2>Add Device</h2>

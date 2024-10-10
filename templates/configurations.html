@@ -86,7 +86,7 @@
             {% endif %}
         {% endwith %}
 
-        <form action="/configurations" method="POST">
+<form action="/configurations" method="POST">
     <div class="form-group">
         <label for="selected_device">Select Device:</label>
         <select class="form-control" id="selected_device" name="selected_device" required>
@@ -97,10 +97,11 @@
         </select>
     </div>
 
+
         <h3>Create VLAN</h3>
     <div class="form-group">
-        <label for="vlan_number">VLAN ID:</label>
-        <input type="text" class="form-control" id="vlan_number" name="vlan_number" placeholder="Enter VLAN ID e.g., 10">
+        <label for="vlan_id">VLAN ID:</label>
+        <input type="text" class="form-control" id="vlan_id" name="vlan_id" placeholder="Enter VLAN ID e.g., 10">
     </div>
     <div class="form-group">
         <label for="vlan_name">VLAN Name:</label>
@@ -108,12 +109,14 @@
     </div>
     <button type="submit" name="action" value="vlan_config" class="btn btn-primary">Create VLAN</button>
 
+
     <h3 class="mt-4">Delete VLAN</h3>
     <div class="form-group">
-        <label for="vlan_number_delete">VLAN ID:</label>
-        <input type="text" class="form-control" id="vlan_number_delete" name="vlan_number_delete" placeholder="Enter VLAN ID e.g., 10">
+        <label for="vlan_id_delete">VLAN ID:</label>
+        <input type="text" class="form-control" id="vlan_id_delete" name="vlan_id_delete" placeholder="Enter VLAN ID e.g., 10">
     </div>
     <button type="submit" name="action" value="delete_vlan" class="btn btn-danger">Delete VLAN</button>
+
 
     <h3 class="mt-4">Interface Configuration</h3>
     <div class="form-group">
@@ -128,40 +131,57 @@
         <label for="subnet_mask">Subnet Mask:</label>
         <input type="text" class="form-control" id="subnet_mask" name="subnet_mask" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
     </div>
+    <label for="noswitchport">No Switchport:</label>
+    <input type="checkbox" name="noswitchport" value="yes">
     <button type="submit" name="action" value="interface_config" class="btn btn-primary">Configure Interface</button>
+
 
     <h3 class="mt-4">Remove IP Address from Interface</h3>
     <div class="form-group">
-        <label for="interface_no_ip">Interface:</label>
-        <input type="text" class="form-control" id="interface_no_ip" name="interface_no_ip" placeholder="Enter Interface e.g., GigabitEthernet0/1">
+        <label for="no_interface">Interface:</label>
+        <input type="text" class="form-control" id="no_interface" name="no_interface" placeholder="Enter Interface e.g., GigabitEthernet0/1">
     </div>
     <div class="form-group">
-        <label for="ip_address">IP Address:</label>
-        <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Enter IP Address e.g., 192.168.1.1">
+        <label for="no_ip_address">IP Address:</label>
+        <input type="text" class="form-control" id="no_ip_address name="no_ip_address" name="no_ip_address" placeholder="Enter IP Address e.g., 192.168.1.1">
     </div>
     <div class="form-group">
-        <label for="subnet_mask">Subnet Mask:</label>
-        <input type="text" class="form-control" id="subnet_mask" name="subnet_mask" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
+        <label for="no_subnet_mask">Subnet Mask:</label>
+        <input type="text" class="form-control" id="no_subnet_mask" name="no_subnet_mask" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
     </div>
+    <label for="switchport">Switchport:</label>
+    <input type="checkbox" name="switchport" value="yes">
     <button type="submit" name="action" value="no_ipaddress" class="btn btn-warning">Remove IP Address</button>
 
-    <h3 class="mt-4">Switchport Access VLAN</h3>
-    <div class="form-group">
-        <label for="interface_switchport">Interface:</label>
-        <input type="text" class="form-control" id="interface_switchport" name="interface" placeholder="Enter Interface e.g., GigabitEthernet0/1">
-    </div>
-    <div class="form-group">
-        <label for="vlan_switchport">VLAN ID:</label>
-        <input type="text" class="form-control" id="vlan_switchport" name="vlan_id" placeholder="Enter VLAN ID e.g., 10">
-    </div>
-    <button type="submit" name="action" value="switchport_access_vlan" class="btn btn-primary">Set Switchport VLAN</button>
 
-    <h3 class="mt-4">Remove Switchport Access VLAN</h3>
-    <div class="form-group">
-        <label for="interface_no_switchport">Interface:</label>
-        <input type="text" class="form-control" id="interface_no_switchport" name="interface" placeholder="Enter Interface e.g., GigabitEthernet0/1">
-    </div>
-    <button type="submit" name="action" value="no_switchport_access_vlan" class="btn btn-warning">Remove Switchport VLAN</button>
+
+    <h3 class="mt-4">Switchport Mode Configuration</h3>
+
+    <label for="interface_name">Interface Name:</label>
+    <input type="text" id="interface_name" name="interface_name" placeholder="Ethernet0/1" ><br><br>
+
+    <label for="mode1">Interface Mode:</label>
+    <input type="text" id="mode1" name="mode1" placeholder="access/trunk" ><br><br>
+
+    <label for="vlan_number">VLAN Number:</label>
+    <input type="text" id="vlan_number" name="vlan_number" placeholder="10" ><br><br>
+
+    <input type="submit" name="action" value="sw_mode"><br><br>
+
+    <h3 class="mt-4">Remove Switchport Mode Configuration</h3>
+    
+    <label for="no_interface_name">Interface Name (for removal):</label>
+    <input type="text" id="no_interface_name" name="no_interface_name" placeholder="Ethernet0/1" ><br><br>
+
+    <label for="mode2">Remove Interface Mode:</label>
+    <input type="text" id="mode2" name="mode2" placeholder="access/trunk" ><br><br>
+
+    <label for="no_vlan_number">VLAN Number (for removal):</label>
+    <input type="text" id="no_vlan_number" name="no_vlan_number" placeholder="10" ><br><br>
+
+    <input type="submit" name="action" value="no_sw_mode">
+
+    
 
     <h3 class="mt-4">IP Default Gateway</h3>
     <div class="form-group">
@@ -186,94 +206,81 @@
         <select class="form-control" id="transport_protocol" name="transport_protocol">
             <option value="telnet">Telnet</option>
             <option value="ssh">SSH</option>
+            <option value="all">All</option>
         </select>
     </div>
     <button type="submit" name="action" value="vty_line_config" class="btn btn-primary">Configure VTY Lines</button>
 
-    <h3 class="mt-4">Routing Configuration</h3>
-    <div class="form-group">
-        <label for="routing_protocol">Routing Protocol:</label>
-        <input type="text" class="form-control" id="routing_protocol" name="routing_protocol" placeholder="Enter Routing Protocol e.g., ospf, rip">
-    </div>
-    <button type="submit" name="action" value="routing_config" class="btn btn-primary">Configure Routing</button>
-
-    <h3 class="mt-4">Remove Routing</h3>
-    <div class="form-group">
-        <label for="routing_protocol_remove">Routing Protocol:</label>
-        <input type="text" class="form-control" id="routing_protocol_remove" name="routing_protocol" placeholder="Enter Routing Protocol e.g., ospf, rip">
-    </div>
-    <button type="submit" name="action" value="no_routing" class="btn btn-danger">Remove Routing</button>
 
     <h3 class="mt-4">Default Route</h3>
     <div class="form-group">
         <label for="default_route">Default Route:</label>
-        <input type="text" class="form-control" id="default_route" name="default_route" placeholder="Enter Default Route e.g., 0.0.0.0/0">
+        <input type="text" class="form-control" id="default_route" name="default_route" placeholder="Enter Default Route e.g., 0.0.0.0 0.0.0.0 192.168.1.10">
     </div>
     <button type="submit" name="action" value="default_route" class="btn btn-primary">Set Default Route</button>
 
+
     <h3 class="mt-4">Remove Default Route</h3>
-    <div class="form-group">
-        <label for="default_route_remove">Default Route:</label>
-        <input type="text" class="form-control" id="default_route_remove" name="default_route" placeholder="Enter Default Route e.g., 0.0.0.0/0">
-    </div>
     <button type="submit" name="action" value="no_default_route" class="btn btn-danger">Remove Default Route</button>
+
 
     <h3 class="mt-4">Static Routes</h3>
     <div class="form-group">
-        <label for="destination_network">Destination Network:</label>
-        <input type="text" class="form-control" id="destination_network" name="destination_network" placeholder="Enter Destination Network e.g., 192.168.1.0">
+        <label for="destination_network_static">Destination Network:</label>
+        <input type="text" class="form-control" id="destination_network_static" name="destination_network_static" placeholder="Enter Destination Network e.g., 192.168.1.0">
     </div>
     <div class="form-group">
         <label for="subnet_mask_static">Subnet Mask:</label>
-        <input type="text" class="form-control" id="subnet_mask_static" name="subnet_mask" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
+        <input type="text" class="form-control" id="subnet_mask_static" name="subnet_mask_static" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
     </div>
     <div class="form-group">
-        <label for="next_hop">Next Hop:</label>
-        <input type="text" class="form-control" id="next_hop" name="next_hop" placeholder="Enter Next Hop e.g., 192.168.1.254">
+        <label for="next_hop_static">Next Hop:</label>
+        <input type="text" class="form-control" id="next_hop_static" name="next_hop_static" placeholder="Enter Next Hop e.g., 192.168.1.254">
     </div>
     <button type="submit" name="action" value="static_routes" class="btn btn-primary">Add Static Route</button>
 
+
     <h3 class="mt-4">Remove Static Route</h3>
     <div class="form-group">
-        <label for="destination_network_remove">Destination Network:</label>
-        <input type="text" class="form-control" id="destination_network_remove" name="destination_network" placeholder="Enter Destination Network e.g., 192.168.1.0">
+        <label for="no_destination_network">Destination Network:</label>
+        <input type="text" class="form-control" id="no_destination_network" name="no_destination_network" placeholder="Enter Destination Network e.g., 192.168.1.0">
     </div>
     <div class="form-group">
-        <label for="subnet_mask_static_remove">Subnet Mask:</label>
-        <input type="text" class="form-control" id="subnet_mask_static_remove" name="subnet_mask" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
+        <label for="no_subnet_mask_static">Subnet Mask:</label>
+        <input type="text" class="form-control" id="no_subnet_mask_static" name="no_subnet_mask_static" placeholder="Enter Subnet Mask e.g., 255.255.255.0">
     </div>
     <button type="submit" name="action" value="no_static" class="btn btn-danger">Remove Static Route</button>
 
     <h3 class="mt-4">OSPF Configuration</h3>
     <div class="form-group">
-        <label for="process_id">Process ID:</label>
-        <input type="text" class="form-control" id="process_id" name="process_id" placeholder="Enter OSPF Process ID e.g., 1">
+        <label for="ospf_id">Process ID:</label>
+        <input type="text" class="form-control" id="ospf_id" name="ospf_id" placeholder="Enter OSPF Process ID e.g., 1">
     </div>
     <div class="form-group">
         <label for="network_ospf">Network:</label>
-        <input type="text" class="form-control" id="network_ospf" name="network" placeholder="Enter Network e.g., 192.168.1.0">
+        <input type="text" class="form-control" id="network_ospf" name="network_ospf" placeholder="Enter Network e.g., 192.168.1.0">
     </div>
     <div class="form-group">
-        <label for="wildcard_mask">Wildcard Mask:</label>
-        <input type="text" class="form-control" id="wildcard_mask" name="wildcard_mask" placeholder="Enter Wildcard Mask e.g., 0.0.0.255">
+        <label for="wildcard_ospf">Wildcard Mask:</label>
+        <input type="text" class="form-control" id="wildcard_ospf" name="wildcard_ospf" placeholder="Enter Wildcard Mask e.g., 0.0.0.255">
     </div>
     <button type="submit" name="action" value="ospf_config" class="btn btn-primary">Configure OSPF</button>
 
     <h3 class="mt-4">Remove OSPF</h3>
     <div class="form-group">
-        <label for="process_id_remove">Process ID:</label>
-        <input type="text" class="form-control" id="process_id_remove" name="process_id" placeholder="Enter OSPF Process ID e.g., 1">
+        <label for="no_ospf_id">Process ID:</label>
+        <input type="text" class="form-control" id="no_ospf_id" name="no_ospf_id" placeholder="Enter OSPF Process ID e.g., 1">
     </div>
     <button type="submit" name="action" value="no_ospf" class="btn btn-danger">Remove OSPF</button>
 
     <h3 class="mt-4">RIP Configuration</h3>
     <div class="form-group">
         <label for="version_rip">Version:</label>
-        <input type="text" class="form-control" id="version_rip" name="version" placeholder="Enter RIP Version e.g., 2">
+        <input type="text" class="form-control" id="version_rip" name="version_rip" placeholder="Enter RIP Version e.g., 2">
     </div>
     <div class="form-group">
         <label for="network_rip">Network:</label>
-        <input type="text" class="form-control" id="network_rip" name="network" placeholder="Enter Network e.g., 192.168.1.0">
+        <input type="text" class="form-control" id="network_rip" name="network_rip" placeholder="Enter Network e.g., 192.168.1.0">
     </div>
     <button type="submit" name="action" value="rip_config" class="btn btn-primary">Configure RIP</button>
 

@@ -14,7 +14,6 @@ def load_devices():
     with open(DEVICE_FILE, 'r') as f:
         return json.load(f)
 
-
 def save_devices(devices):
     with open(DEVICE_FILE, 'w') as f:
         json.dump(devices, f, indent=4)
@@ -124,24 +123,44 @@ def configurations():
             return redirect(url_for('configurations'))
 
         action = request.form.get('action')  
-        vlan_id = request.form.get('vlan_number')
-        vlan_id_delete = request.form.get('vlan_number_delete') 
+        vlan_id = request.form.get('vlan_id')
+        vlan_name = request.form.get('vlan_name')
+        vlan_id_delete = request.form.get('vlan_id_delete') 
         interface = request.form.get('interface') 
         ip_address = request.form.get('ip_address')  
+        no_ip_address = request.form.get('no_ip_address')
         subnet_mask = request.form.get('subnet_mask')
         default_gateway  = request.form.get('default_gateway')
         line_type = request.form.get('line_type')
         transport_protocol = request.form.get('transport_protocol')
-        routing_protocol = request.form.get('routing_protocol')
         default_route = request.form.get('default_route')
-        destination_network = request.form.get('destination_network')
         subnet_mask = request.form.get('subnet_mask')
-        next_hop = request.form.get('next_hop')
-        process_id = request.form.get('process_id')
-        network = request.form.get('network')
-        wildcard_mask = request.form.get('wildcard_mask')
-        version = request.form.get('version')
-
+        switchport = request.form.get('switchport')
+        noswitchport = request.form.get('noswitchport')
+        no_subnet_mask = request.form.get('no_subnet_mask')
+        no_interface = request.form.get('no_interface')
+        interface_name = request.form.get('interface_name')
+        vlan_number = request.form.get('vlan_number')
+        mode1 = request.form.get('mode1')
+        mode1 = request.form.get('mode1')
+        mode2 = request.form.get('mode2')
+        no_vlan_number = request.form.get('no_vlan_number')
+        no_interface_name = request.form.get('no_interface_name')
+        no_default_route = request.form.get('no_default_route')
+        destination_network_static = request.form.get('destination_network_static')
+        subnet_mask_static = request.form.get('subnet_mask_static')
+        next_hop_static = request.form.get('next_hop_static')
+        no_destination_network_static = request.form.get('no_destination_network_static')
+        no_subnet_mask_static = request.form.get('no_subnet_mask_static')
+        no_next_hop_static = request.form.get('no_next_hop_static')
+        ospf_id = request.form.get('ospf_id')
+        no_ospf_id = request.form.get('no_ospf_id')
+        network_ospf = request.form.get('network_ospf')
+        wildcard_ospf = request.form.get('wildcard_ospf')
+        version_rip = request.form.get('version_rip')
+        network_rip = request.form.get('network_rip')
+        
+        
         
         try:
             connection_params = {
@@ -155,8 +174,6 @@ def configurations():
             net_connect.enable() 
 
             if action == 'vlan_config':
-                if vlan_id and request.form.get('vlan_name'):
-                    vlan_name = request.form.get('vlan_name')
                     config_commands = [
                         f'vlan {vlan_id}',
                         f'name {vlan_name}',
@@ -166,81 +183,78 @@ def configurations():
                     ]
                     output = net_connect.send_config_set(config_commands)
 
-            elif action == 'delete_vlan':
-                if vlan_id_delete:  
+            elif action == 'delete_vlan': 
                     config_commands = [
                         f'no vlan {vlan_id_delete}',
                         'end',
                         'show vlan'
                     ]
                     output = net_connect.send_config_set(config_commands)
-                else:
-                    output = "VLAN ID is required for deletion."
                     
             elif action == 'interface_config':
-                if interface and ip_address and subnet_mask:
-                    config_commands = [f'interface {interface}']
-
-                    # Check if the hostname exists in device_info and if it starts with 'R'
-                    hostname = device_info.get('hostname')  # Get the hostname from device_info
-                    if hostname:
-                        # If hostname does not start with 'R', add 'no switchport'
-                        if not hostname.startswith('R'):
-                            config_commands.append('no switchport')
-
-                    # Continue with the IP configuration commands
-                    config_commands.extend([
-                        f'ip address {ip_address} {subnet_mask}',  
+                    config_commands = [
+                        f'interface {interface}',
+                        f'ip address {ip_address} {subnet_mask}',
                         'no shutdown',
-                        'exit',
-                        'end',
-                        'show ip interface brief'
-                    ])
-                    
-                    output = net_connect.send_config_set(config_commands, read_timeout=10)
-
-                    # Update the device IP in device_info and save the changes
-                    device_info['ip'] = ip_address  
-                    save_devices(devices)
-
-                    
-            elif action == 'no_ipaddress':
-                if interface:
-                    config_commands = [
-                        f'interface {interface}',
-                        f'no {ip_address} {subnet_mask}',
-                        'exit'
                         'end',
                         'show ip interface brief'
                     ]
-                    output = net_connect.send_config_set(config_commands)
-                    device_info['ip'] = ip_address  # Update the IP in device_info
-                    save_devices(devices)
-                    
-            elif action == 'switchport_access_vlan':
-                if interface and vlan_id:
-                    config_commands = [
-                        f'interface {interface}',
-                        f'switchport access vlan {vlan_id}',
-                        'exit',
-                        'end',
-                        'show running-config interface ' + interface
-                    ]
+
+                    if noswitchport == 'yes':
+                        config_commands.insert(1, 'no switchport')
+
                     output = net_connect.send_config_set(config_commands)
 
-            elif action == 'no_switchport_access_vlan':
-                if interface:
+            elif action == 'no_ipaddress':              
                     config_commands = [
-                        f'interface {interface}',
-                        'no switchport access vlan',
-                        'exit',
+                        f'interface {no_interface}',
+                        f'no ip address {no_ip_address} {no_subnet_mask}',  
+                        'no shutdown',
                         'end',
-                        'show running-config interface ' + interface
+                        'show ip interface brief'
                     ]
+                    
+                    if switchport == 'yes': 
+                        config_commands.insert(4, 'switchport')
+                    
                     output = net_connect.send_config_set(config_commands)
+
+
+            elif action == 'sw_mode':
+                config_commands = [
+                        f'interface {interface_name}',
+                        'switchport trunk encapsulation dot1q',
+                        f'switchport mode {mode1}',
+                        f'switchport access vlan {vlan_number}',
+                        'end',
+                        'show vlan brief',
+                        'show interface trunk'
+                    ]
+
+                # if switchport == 'yes':
+                #     config_commands.insert(1, 'switchport')  
+
+                output = net_connect.send_config_set(config_commands)
+                    
+                    
+            elif action == 'no_sw_mode':
+                config_commands = [
+                        f'interface {no_interface_name}',
+                        'no switchport trunk encapsulation dot1q',
+                        'no switchport mode trunk',
+                        f'no switchport mode {mode2}',
+                        f'no switchport access vlan {no_vlan_number}',
+                        'end',
+                        'show vlan brief',
+                        'show interface trunk'
+                    ]
+                
+                # if noswitchport == 'yes':
+                #     config_commands.insert(1, 'no switchport')  
+
+                output = net_connect.send_config_set(config_commands)
 
             elif action == 'ip_default_gateway':
-                if default_gateway:
                     config_commands = [
                         f'ip default-gateway {default_gateway}',
                         'end',
@@ -257,7 +271,7 @@ def configurations():
                 output = net_connect.send_config_set(config_commands)
 
             elif action == 'vty_line_config':
-                if line_type in ['0 4', '5 15'] and transport_protocol in ['telnet', 'ssh']:
+                if line_type in ['0 4', '5 15'] and transport_protocol in ['telnet', 'ssh', 'all']:
                     config_commands = [
                         f'line vty {line_type}',
                         f'transport input {transport_protocol}',  
@@ -268,27 +282,7 @@ def configurations():
                     ]
                     output = net_connect.send_config_set(config_commands)
 
-            elif action == 'routing_config':
-                if routing_protocol:
-                    config_commands = [
-                        f'router {routing_protocol}',
-                        'exit',
-                        'end',
-                        'show ip route'
-                    ]
-                    output = net_connect.send_config_set(config_commands)
-
-            elif action == 'no_routing':
-                if routing_protocol:
-                    config_commands = [
-                        f'no router {routing_protocol}',
-                        'end',
-                        'show ip route'
-                    ]
-                    output = net_connect.send_config_set(config_commands)
-
             elif action == 'default_route':
-                if default_route:
                     config_commands = [
                         f'ip route {default_route}',
                         'end',
@@ -297,37 +291,34 @@ def configurations():
                     output = net_connect.send_config_set(config_commands)
 
             elif action == 'no_default_route':
-                if default_route:
                     config_commands = [
-                        f'no ip route {default_route}',
+                        f'no ip route {no_default_route}',
                         'end',
                         'show ip route'
                     ]
                     output = net_connect.send_config_set(config_commands)
 
             elif action == 'static_routes':
-                if destination_network and subnet_mask and next_hop:
                     config_commands = [
-                        f'ip route {destination_network} {subnet_mask} {next_hop}',
+                        f'ip route {destination_network_static} {subnet_mask_static} {next_hop_static}',
                         'end',
-                        'show ip route'
+                        'show ip route static'
                     ]
                     output = net_connect.send_config_set(config_commands)
 
             elif action == 'no_static':
-                if destination_network and subnet_mask:
                     config_commands = [
-                        f'no ip route {destination_network} {subnet_mask}',
-                        'end',
-                        'show ip route'
+                        f'no ip route {no_destination_network_static} {no_subnet_mask_static} {no_next_hop_static}',
+                        'end', 
+                        'show ip route static'
                     ]
                     output = net_connect.send_config_set(config_commands)
 
             elif action == 'ospf_config':
-                if process_id and network and wildcard_mask:
                     config_commands = [
-                        f'router ospf {process_id}',
-                        f'network {network} {wildcard_mask} area 0', 
+                        'ip routing',
+                        f'router ospf {ospf_id}',
+                        f'network {network_ospf} {wildcard_ospf} area 0', 
                         'exit',
                         'end',
                         'show ip ospf'
@@ -335,20 +326,19 @@ def configurations():
                     output = net_connect.send_config_set(config_commands)
 
             elif action == 'no_ospf':
-                if process_id:
                     config_commands = [
-                        f'no router ospf {process_id}',
+                        f'no router ospf {no_ospf_id}',
                         'end',
                         'show ip ospf'
                     ]
                     output = net_connect.send_config_set(config_commands)
 
             elif action == 'rip_config':
-                if version and network:
                     config_commands = [
                         'router rip',
-                        f'version {version}',
-                        f'network {network}',
+                        f'version {version_rip}',
+                        'no auto-summary',
+                        f'network {network_rip}',
                         'exit',
                         'end',
                         'show ip route rip'
@@ -376,6 +366,68 @@ def configurations():
             return redirect(url_for('configurations'))
 
     return render_template('configurations.html', devices=devices)
+
+
+@app.route('/show_configs', methods=["GET", "POST"])
+def show_configs():
+    devices = load_devices()  
+
+    if request.method == "POST":
+        selected_device = request.form.get('selected_device')  
+        device_info = next((d for d in devices if d.get('ip') == selected_device), None)
+
+        if not device_info:
+            flash("Selected device not found!", "error")
+            return redirect(url_for('show_configs'))
+
+        try:
+            connection_params = {
+                'device_type': device_info['device_type'],
+                'ip': device_info['ip'],
+                'username': device_info['username'],
+                'password': device_info['password'],
+            }
+
+            net_connect = ConnectHandler(**connection_params)  
+            net_connect.enable() 
+
+            show_commands = []
+            if request.form.get('show_run'):
+                show_commands.append('show running-config')
+            if request.form.get('show_ip_int_brief'):
+                show_commands.append('show ip interface brief')
+            if request.form.get('show_version'):
+                show_commands.append('show version')
+            if request.form.get('show_interface'):
+                show_commands.append('show interfaces')
+            if request.form.get('show_vlan'):
+                show_commands.append('show vlan brief')
+            if request.form.get('show_interface_trunk'):
+                show_commands.append('show interface trunk')
+            if request.form.get('show_ip_route'):
+                show_commands.append('show ip route')
+            if request.form.get('show_ip_ospf'):
+                show_commands.append('show ip ospf')
+            if request.form.get('show_ip_rip'):
+                show_commands.append('show ip route rip')
+            if request.form.get('show_ip_protocol'):
+                show_commands.append('show ip protocol')
+
+            output = ""
+            for command in show_commands:
+                output += f"\nCommand: {command}\n"
+                result = net_connect.send_command(command)
+                output += result + "\n"
+
+            net_connect.disconnect()
+
+            return render_template('show_configs.html', devices=devices, output=output)
+
+        except Exception as e:
+            flash(f"Error: {str(e)}", "error")
+            return redirect(url_for('show_configs'))
+
+    return render_template('show_configs.html', devices=devices)
 
 
 
