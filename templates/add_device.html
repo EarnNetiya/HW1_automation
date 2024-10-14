@@ -4,42 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Device</title>
+    <link rel="stylesheet" href="static/css/add_device.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         body {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        nav {
+        nav  {
             position: fixed;
             left: 0;
             top: 0;
-            width: 200px;
+            width: 220px;
             height: 100%;
-            background-color: #f8f9fa;
-            padding-top: 20px;
+            background-color: #04364A;
+            padding-top: 30px;
         }
         nav ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
+            margin: 0;
         }
         nav ul li {
-            margin: 20px 0;
+            margin: 25px 0;
         }
         nav ul li a {
             text-decoration: none;
-            color: #333;
-            font-size: 18px;
-            display: block;
-            padding: 10px;
-            transition: background-color 0.3s ease;
+            color: #ffffff;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         nav ul li a:hover {
-            background-color: #007bff;
-            color: white;
+            background-color: #065A7F;
+            color: #ffffff;
         }
+        nav ul li a i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
         .container {
             margin-left: 220px;
             padding: 20px;
@@ -49,28 +59,14 @@
         }
     </style>
 
-<nav>
+<nav class="sidebar">
     <ul>
-        <li><a href="/add_device">
-            <i class="fas fa-plus-circle"></i>
-            <span class="nav-item">Add Device</span>
-        </a></li>
-        <li><a href="/configurations">
-            <i class="fas fa-cog"></i>
-            <span class="nav-item">Configurations</span>
-        </a></li>
-        <li><a href="/show_configs">
-            <i class="fas fa-list"></i>
-            <span class="nav-item">Show Configurations</span>
-        </a></li>
-        <li><a href="/logout">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="nav-item">Logout</span>
-        </a></li>
+        <li><a href="/add_device">Add Device</a></li>
+        <li><a href="/configurations">Configurations</a></li>
+        <li><a href="/show_configs" class="active">Show Configurations</a></li>
+        <li><a href="/logout">Logout</a></li>
     </ul>
 </nav>
-
-</head>
 
 
 <body>

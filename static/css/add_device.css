@@ -1,4 +1,4 @@
-/* config_inter.css */
+/* add_device.css */
 
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
@@ -11,60 +11,59 @@
 }
 
 body {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Kanit', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
 }
-nav  {
+
+/* Navigation Styles */
+nav {
+    border-right: 2px solid #333;
     position: fixed;
     left: 0;
     top: 0;
     width: 220px;
-    height: 100%;
+    height: 100vh;
     background-color: #04364A;
     padding-top: 30px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
 }
+
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 nav ul li {
     margin: 25px 0;
 }
+
 nav ul li a {
     text-decoration: none;
-    color: #ffffff;
+    color: #333;
     font-size: 18px;
     display: flex;
     align-items: center;
     padding: 10px 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 nav ul li a:hover {
-    background-color: #065A7F;
+    background-color: #04364A;
     color: #ffffff;
 }
+
 nav ul li a i {
     margin-right: 10px;
     font-size: 20px;
 }
 
-.container {
-    margin-left: 220px;
-    padding: 20px;
-}
-.config-section {
-    margin-bottom: 40px;
-}
 
-/* Container Styles */
-.container {
-    margin-left: 240px; /* Adjusted for nav width + padding */
-    padding: 40px 30px;
-    background-color: #ffffff;
-    min-height: 100vh;
-}
+
 
 /* Headings */
 h1, h2, h3 {
@@ -119,31 +118,12 @@ select:focus {
     border-color: #04364A;
     outline: none;
 }
-input[type="submit"] {
-    background-color: #04364A; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 10px 20px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make the container inline-block */
-    font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
 
 button.btn-primary,
 button.btn-danger,
 button.btn-warning,
 button.btn-secondary {
-    background-color: #003153 ;
+    background-color: #04364A;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -165,15 +145,15 @@ button.btn-danger:hover {
 }
 
 button.btn-warning {
-    background-color: #8b0000;
+    background-color: #ffc107;
 }
 
 button.btn-warning:hover {
-    background-color: #c82333;
+    background-color: #e0a800;
 }
 
 button.btn-secondary {
-    background-color: #808080;
+    background-color: #6c757d;
 }
 
 button.btn-secondary:hover {
@@ -185,7 +165,6 @@ input[type="checkbox"] {
     margin-left: 10px;
     transform: scale(1.2);
     vertical-align: middle;
-    
 }
 
 /* Alert Styles */
@@ -206,13 +185,20 @@ input[type="checkbox"] {
     opacity: 0.75;
 }
 
-/* Command Output Styles */
-pre {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid #ced4da;
-    overflow-x: auto;
+/* Device List Styles */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item span {
+    font-size: 16px;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 14px;
 }
 
 /* Responsive Styles */
@@ -278,6 +264,10 @@ pre {
     h3 {
         font-size: 1.3rem;
     }
+
+    .list-group-item span {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -324,5 +314,9 @@ pre {
 
     h3 {
         font-size: 1.2rem;
+    }
+
+    .list-group-item span {
+        font-size: 12px;
     }
 }

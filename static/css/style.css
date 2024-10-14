@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -29,7 +29,6 @@ nav{
     overflow: hidden;
     transition: width 0.2s linear;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-    position: fixed;
 }
 .logo{
     text-align: center;
@@ -52,7 +51,7 @@ nav{
 a{
     position: relative;
     color: white;
-    font-size: 18px;
+    font-size: 14px;
     display: table;
     width: 300px;
     padding: 10px;
@@ -85,69 +84,56 @@ nav:hover{
 }
 /* ส่วนของNavbar*/
 /* ส่วนของLogin*/
-.container {
-    display: flex;
+.container{
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     height: 100vh;
 }
-
-.wrapper {
+.title{
     text-align: center;
-    padding: 15rem;
-    background-color: #04364A;
-    position: relative;
-    border-radius: 50px;
-    box-shadow: 10px 5px 5px #8EACCD;
+    margin-bottom: -10px;
+    margin-left: 10vh;
+    margin-top: 350px;
 }
 
-.wrapper h1 {
+.title h1{
     font-size: 50px;
-    margin-bottom: 10px;
-    color: #dfe9f5;
-    text-shadow: 2px 2px 4px #000000;
+    color: #176B87;
 }
 
-.form_mange {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-}
-
-.form_mange input {
-    padding: 10px;
-    border-radius: 50px;
+.box-input_name{
     text-align: center;
-    width: 300px;
-    font-size: 20px;
-    border: 1px solid;
-    transition: all .2s ease-in-out; 
+    margin-bottom: 20px;
+    margin-left: 10vh;
+    margin-top: 40px;
 }
-
-
-
-
-.form_mange button {
-    padding: 10px 40px;
+.input_field{
+    position: relative;
+    max-width: 100%;
+    width: 16%;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.box-button{
+    text-align: center;
+    margin-bottom: 30px;
+    margin-left: 10vh;
+    margin-top: 40px;
+}
+.box-button button{
+    padding: 15px 40px;
     background-color: #176B87;
-    font-size: 20px;
     color: white;
     border: none;
-    border-radius: 40px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 30px; 
-    text-shadow: 2px 2px 4px #000000;
 }
 
-.form_mange button:hover{
-    text-shadow: 2px 2px 4px #000000;
-    cursor: pointer;
-    transition-duration: 0.5s;
-    opacity: 70%;
-}
-.form_mange button:hover {
-    background-color: #176B87;
-    color: #fff;
-    transform: translateY(-2px);
+.logout{
+    margin-top: 5rem;
+    text-transform: uppercase;
+    
 }

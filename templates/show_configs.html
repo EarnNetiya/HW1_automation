@@ -1,142 +1,56 @@
-<!-- show_configs.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Device Configurations</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 200px;
-            height: 100%;
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        nav ul li {
-            margin: 20px 0;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-size: 18px;
-            display: block;
-            padding: 10px;
-            transition: background-color 0.3s ease;
-        }
-        nav ul li a:hover {
-            background-color: #007bff;
-            color: white;
-        }
-        .container {
-            margin-left: 220px;
-            padding: 20px;
-        }
-        .config-section {
-            margin-bottom: 40px;
-        }
-    </style>
-
-<nav>
-    <ul>
-        <li><a href="/add_device">
-            <i class="fas fa-plus-circle"></i>
-            <span class="nav-item">Add Device</span>
-        </a></li>
-        <li><a href="/configurations">
-            <i class="fas fa-cog"></i>
-            <span class="nav-item">Configurations</span>
-        </a></li>
-        <li><a href="/show_configs">
-            <i class="fas fa-list"></i>
-            <span class="nav-item">Show Configurations</span>
-        </a></li>
-        <li><a href="/logout">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="nav-item">Logout</span>
-        </a></li>
-    </ul>
-</nav>
+    <link rel="stylesheet" href="static/css/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Rubik:wght@300&display=swap" rel="stylesheet">
 </head>
-
-
 <body>
-    <div class="container">
+    <nav class="sidebar">
+        <ul>
+            <li><a href="/add_device">Add Device</a></li>
+            <li><a href="/configurations">Configurations</a></li>
+            <li><a href="/show_configs" class="active">Show Configurations</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
         <h1>Show Device Configurations</h1>
         
-        <form method="POST">
-            <label for="selected_device">Select Device:</label>
-            <select name="selected_device" required>
+        <form method="POST" class="config-form">
+            <label for="selected_device" class="form-label">Select Device:</label>
+            <select name="selected_device" class="form-select" required>
                 {% for device in devices %}
                     <option value="{{ device.ip }}">{{ device.hostname }} ({{ device.ip }})</option>
                 {% endfor %}
             </select>
-        
-            <h4>Select Options:</h4>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_run" id="show_run">
-                <label class="form-check-label" for="show_run">Show Running Configuration</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_ip_int_brief" id="show_ip_int_brief">
-                <label class="form-check-label" for="show_ip_int_brief">Show IP Interface Brief</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_version" id="show_version">
-                <label class="form-check-label" for="show_version">Show Version</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_interface" id="show_interface">
-                <label class="form-check-label" for="show_interface">Show Interfaces</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_vlan" id="show_vlan">
-                <label class="form-check-label" for="show_vlan">Show VLAN Brief</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_interface_trunk" id="show_interface_trunk">
-                <label class="form-check-label" for="show_interface_trunk">Show Interface Trunk</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_ip_route" id="show_ip_route">
-                <label class="form-check-label" for="show_ip_route">Show IP Route</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_ip_ospf" id="show_ip_ospf">
-                <label class="form-check-label" for="show_ip_ospf">Show IP OSPF</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_ip_rip" id="show_ip_rip">
-                <label class="form-check-label" for="show_ip_rip">Show IP Route RIP</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="show_ip_protocol" id="show_ip_protocol">
-                <label class="form-check-label" for="show_ip_protocol">Show IP Protocol</label>
+
+            <h4 class="options-header">Select Options:</h4>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="show_run"> Show Running Configuration</label>
+                <label><input type="checkbox" name="show_ip_int_brief"> Show IP Interface Brief</label>
+                <label><input type="checkbox" name="show_version"> Show Version</label>
+                <label><input type="checkbox" name="show_interface"> Show Interfaces</label>
+                <label><input type="checkbox" name="show_vlan"> Show VLAN Brief</label>
+                <label><input type="checkbox" name="show_interface_trunk"> Show Interface Trunk</label>
+                <label><input type="checkbox" name="show_ip_route"> Show IP Route</label>
+                <label><input type="checkbox" name="show_ip_ospf"> Show IP OSPF</label>
+                <label><input type="checkbox" name="show_ip_rip"> Show IP Route RIP</label>
+                <label><input type="checkbox" name="show_ip_protocol"> Show IP Protocol</label>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Show Config</button>
+            <button type="submit" class="btn-submit">Show Config</button>
         </form>
-        
+
         {% if output %}
-            <h2>Output:</h2>
-            <pre>{{ output }}</pre>
+            <h2 class="output-header">Output:</h2>
+            <pre class="output">{{ output }}</pre>
         {% endif %}
         
-
-        <a href="{{ url_for('show_configs') }}" class="btn btn-secondary mt-3">Clear Output</a>
+        <a href="{{ url_for('show_configs') }}" class="btn-clear">Clear Output</a>
     </div>
 </body>
 </html>

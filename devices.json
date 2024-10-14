@@ -1,22 +1,15 @@
 [
     {
         "device_type": "cisco_ios",
+        "hostname": "R1",
+        "ip": "192.168.1.143",
+        "username": "cisco",
+        "password": "cisco"
+    },
+    {
+        "device_type": "cisco_ios",
         "hostname": "sw1",
-        "ip": "192.168.1.131",
-        "username": "cisco",
-        "password": "cisco"
-    },
-    {
-        "device_type": "cisco_ios",
-        "hostname": "R",
-        "ip": "192.168.1.10",
-        "username": "cisco",
-        "password": "cisco"
-    },
-    {
-        "device_type": "cisco_ios",
-        "hostname": "sw2",
-        "ip": "192.168.1.133",
+        "ip": "192.168.1.138",
         "username": "cisco",
         "password": "cisco"
     }
