@@ -166,6 +166,8 @@ button.btn-danger:hover {
 
 button.btn-warning {
     background-color: #8b0000;
+    color: white;
+    
 }
 
 button.btn-warning:hover {
